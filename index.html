@@ -23,6 +23,7 @@
 
     <button id="goBack">back1111111</button>
     <button id="saveToAlbum">save To Album</button>
+    <button id="openweb">open google web</button>
     <button id="openWechat">open Wechat</button>
     <button id="openAliPay">open AliPay</button>
     <button id="openToolPack">openToolPack</button>
@@ -34,6 +35,7 @@
     />
   </body>
   <script type="text/javascript">
+
     document.getElementById("goBack").addEventListener("click", function(){
       window.ReactNativeWebView.postMessage(
         JSON.stringify({
@@ -42,11 +44,19 @@
       )
     });
 
-    document.getElementById("saveToAlbum").addEventListener("click", function(){
+    document.getElementById("goBack").addEventListener("click", function(){
       window.ReactNativeWebView.postMessage(
         JSON.stringify({
-          action: 'saveToAlbum',
-          qrcode: 'abc123',
+          action: 'disconnect',
+        })
+      )
+    });
+
+    document.getElementById("openweb").addEventListener("click", function(){
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          action: 'openweb',
+          url: 'http://google.com.tw',
         })
       )
     });
@@ -83,6 +93,8 @@
         JSON.stringify({
           action: 'openToolPack',
           url: 'http://hotmail.com.tw',
+          test:'test',
+          test2: "test2"
         })
       )
     });
