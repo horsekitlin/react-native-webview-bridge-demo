@@ -20,7 +20,9 @@
     </form>
 
     <p>upload file name: <span id="fileName"></span></p>
-
+    <p>===========================</p>
+    <p id="json"></p>
+    <p>===========================</p>
     <button id="goBack">back1111111</button>
     <button id="saveToAlbum">save To Album</button>
     <button id="openweb">open google web</button>
@@ -35,6 +37,25 @@
     />
   </body>
   <script type="text/javascript">
+    window.addEventListener("message", event => {
+      document.getElementById("json").innerHTML = event.data;
+      const data = JSON.parse(event.data)
+      try {
+        switch (data.action) {
+          //打开相簿 选取相片后会将图片转为 base64 发送到前端 example: { action: "getImageBase64", base64: "data:image/jpeg;base64,......"}
+          case 'getImageBase64':
+            const { base64 } = data
+            img.src = base64
+          default:
+            console.log('action not defined')
+        }
+      } catch (error) {
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({ action: 'error', message: error.message }),
+          '*'
+        )
+      }
+    });
 
     document.getElementById("goBack").addEventListener("click", function(){
       window.ReactNativeWebView.postMessage(
