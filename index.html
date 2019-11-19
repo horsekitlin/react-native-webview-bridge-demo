@@ -58,26 +58,26 @@
       }
     });
 
-    document.addEventListener("message", event => {
-      alert(event.data, 'document');
-      document.getElementById("json").innerHTML = event.data;
-      const data = JSON.parse(event.data)
-      try {
-        switch (data.action) {
-          //打开相簿 选取相片后会将图片转为 base64 发送到前端 example: { action: "getImageBase64", base64: "data:image/jpeg;base64,......"}
-          case 'getImageBase64':
-            const { base64 } = data
-            img.src = base64
-          default:
-            console.log('action not defined')
-        }
-      } catch (error) {
-        window.ReactNativeWebView.postMessage(
-          JSON.stringify({ action: 'error', message: error.message }),
-          '*'
-        )
-      }
-    });
+    // document.addEventListener("message", event => {
+    //   alert(event.data, 'document');
+    //   document.getElementById("json").innerHTML = event.data;
+    //   const data = JSON.parse(event.data)
+    //   try {
+    //     switch (data.action) {
+    //       //打开相簿 选取相片后会将图片转为 base64 发送到前端 example: { action: "getImageBase64", base64: "data:image/jpeg;base64,......"}
+    //       case 'getImageBase64':
+    //         const { base64 } = data
+    //         img.src = base64
+    //       default:
+    //         console.log('action not defined')
+    //     }
+    //   } catch (error) {
+    //     window.ReactNativeWebView.postMessage(
+    //       JSON.stringify({ action: 'error', message: error.message }),
+    //       '*'
+    //     )
+    //   }
+    // });
 
     document.getElementById("goBack").addEventListener("click", function(){
       window.ReactNativeWebView.postMessage(
