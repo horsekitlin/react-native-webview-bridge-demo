@@ -37,7 +37,9 @@
     />
   </body>
   <script type="text/javascript">
+  alert(123);
     window.addEventListener("message", event => {
+      alert(event.data);
       document.getElementById("json").innerHTML = event.data;
       const data = JSON.parse(event.data)
       try {
