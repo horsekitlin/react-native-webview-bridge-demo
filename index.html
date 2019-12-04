@@ -41,9 +41,9 @@
     function responseFromApp(type, code, data) {
       alert(`${event.data} document`);
       try {
-        switch (data.action) {
+        switch (type) {
           //打开相簿 选取相片后会将图片转为 base64 发送到前端 example: { action: "getImageBase64", base64: "data:image/jpeg;base64,......"}
-          case 'getImageBase64':
+          case 1:
             const { base64 } = data
             img.src = base64
           default:
@@ -92,6 +92,15 @@
     });
 
     document.getElementById("openAlbum").addEventListener("click", function(){
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          action: 'openAlbum',
+          qrcode: 'abc123',
+        })
+      )
+    });
+
+    document.getElementById("saveToAlbum").addEventListener("click", function(){
       window.ReactNativeWebView.postMessage(
         JSON.stringify({
           action: 'saveToAlbum',
